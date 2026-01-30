@@ -1,0 +1,18 @@
+<h1>Hotels per city</h1>
+
+<form method="get">
+  <select name="city">
+    {% for city in cities %}
+      <option value="{{ city.code }}" {% if city.code == selected_city %}selected{% endif %}>{{ city.name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Show hotels</button>
+</form>
+
+<ul>
+  {% for hotel in hotels %}
+    <li>{{ hotel.name }} ({{ hotel.code }})</li>
+  {% empty %}
+    <li>No hotels found</li>
+  {% endfor %}
+</ul>
