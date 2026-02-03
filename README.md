@@ -15,6 +15,22 @@ Project bevat:
 
 ## Setup
 
-## Eén klik starten
+### Vereisten
+- Python 3.11 of 3.12
+- pip
 
-Je kunt alles automatisch laten draaien met het bestand `run_all.bat`. Dit doet migraties uitvoeren, de CSV-data via HTTP importeren en de server starten. Dubbelklik op het bestand.
+### Installatie
+
+```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd Integrating-third-parties
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Database migration
+python manage.py migrate
+
+# 4. Start the development server
+python manage.py runserver

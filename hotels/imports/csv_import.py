@@ -6,7 +6,7 @@ from hotels.models import City, Hotel
 
 
 def import_cities_from_url():
-    # Haal CSV van internet
+    # Fetch CSV from the internet
     r = requests.get(settings.CITY_CSV_URL, auth=(settings.CSV_USERNAME, settings.CSV_PASSWORD))
     r.raise_for_status()
 
@@ -17,12 +17,12 @@ def import_cities_from_url():
         code = row[0].replace('"', '').strip()
         name = row[1].replace('"', '').strip()
 
-        # Voeg toe of update bestaande city
+        # Add or update existing city
         City.objects.update_or_create(code=code, defaults={'name': name})
 
 
 def import_hotels_from_url():
-    # Haal hotel CSV
+    # Fetch hotel CSV
     r = requests.get(settings.HOTEL_CSV_URL, auth=(settings.CSV_USERNAME, settings.CSV_PASSWORD))
     r.raise_for_status()
 
@@ -34,13 +34,13 @@ def import_hotels_from_url():
         hotel_code = row[1].replace('"', '').strip()
         name = row[2].replace('"', '').strip()
 
-        # Zoek de bijbehorende city
+        # Find the corresponding city
         try:
             city = City.objects.get(code=city_code)
         except City.DoesNotExist:
             continue
 
-        # Voeg hotel toe of update
+        # Add or update hotel
         Hotel.objects.update_or_create(
             code=hotel_code,
             defaults={
