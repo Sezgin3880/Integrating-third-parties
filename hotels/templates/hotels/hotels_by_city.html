@@ -3,16 +3,20 @@
 <form method="get">
   <select name="city">
     {% for city in cities %}
-      <option value="{{ city.code }}" {% if city.code == selected_city %}selected{% endif %}>{{ city.name }}</option>
+      <option value="{{ city.code }}" {% if city.code == selected_city %}selected{% endif %}>
+        {{ city.name }}
+      </option>
     {% endfor %}
   </select>
   <button type="submit">Show hotels</button>
 </form>
 
 <ul>
-  {% for hotel in hotels %}
-    <li>{{ hotel.name }} ({{ hotel.code }})</li>
-  {% empty %}
+  {% if hotels %}
+    {% for hotel in hotels %}
+      <li>{{ hotel.name }} ({{ hotel.code }})</li>
+    {% endfor %}
+  {% else %}
     <li>No hotels found</li>
-  {% endfor %}
+  {% endif %}
 </ul>
